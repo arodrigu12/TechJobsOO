@@ -10,6 +10,11 @@ namespace TechJobs.ViewModels
     {
         [Required]
         public string Name { get; set; }
+        //Added 4 props below for TODO #1
+        public Employer Employer { get; set; }
+        public Location Location { get; set; }
+        public CoreCompetency CoreCompetency { get; set; }
+        public PositionType PositionType { get; set; }
 
         [Required]
         [Display(Name = "Employer")]
