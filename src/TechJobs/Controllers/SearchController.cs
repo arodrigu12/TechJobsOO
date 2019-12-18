@@ -27,17 +27,24 @@ namespace TechJobs.Controllers
         // Process search submission and display search results
         public IActionResult Results(SearchJobsViewModel jobsViewModel)
         {
+            if (ModelState.IsValid)// Added by AR to force user to enter a search term
+            {
+                
 
-            if (jobsViewModel.Column.Equals(JobFieldType.All) || jobsViewModel.Value.Equals(""))
-            {
-                jobsViewModel.Jobs = jobData.FindByValue(jobsViewModel.Value);
+                if (jobsViewModel.Column.Equals(JobFieldType.All) /*|| jobsViewModel.Value.Equals("")*/)
+                {
+                    jobsViewModel.Jobs = jobData.FindByValue(jobsViewModel.Value);
+                }
+                else
+                {
+                    jobsViewModel.Jobs = jobData.FindByColumnAndValue(jobsViewModel.Column, jobsViewModel.Value);
+                }
+
+                jobsViewModel.Title = "Search";
+
+                //return View("Index", jobsViewModel);
+
             }
-            else
-            {
-                jobsViewModel.Jobs = jobData.FindByColumnAndValue(jobsViewModel.Column, jobsViewModel.Value);
-            }
-            
-            jobsViewModel.Title = "Search";
 
             return View("Index", jobsViewModel);
         }

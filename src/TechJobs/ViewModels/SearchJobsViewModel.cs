@@ -18,6 +18,7 @@ namespace TechJobs.ViewModels
 
         // The search value
         [Display(Name = "Keyword:")]
+        [Required]
         public string Value { get; set; } = "";
 
         public SearchJobsViewModel() : base() { }
